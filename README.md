@@ -3,7 +3,7 @@ This repo provides the MATLAB code for classifying ERP data ;
 ## File description
 ERP_estimation.m : Code for estimate low-rank weighted matrix W 
 
-Nuc_APGM.m : Code forthe accelerated proximal gradient method (APGM) solving nuclear norm regularized linear least squares problem.
+Nuc_APGM.m : Code for the accelerated proximal gradient method (APGM) solving nuclear norm regularized linear least squares problem.
 
 data.mat: dataset file
 
