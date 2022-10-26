@@ -1,4 +1,4 @@
-function [W,SF,TF,alpha] = SBLEST_ERP(X, Y, Maxiters, e, lam)
+function [W,SF,TF,alpha] = SBLEST_ERP(X, Y, Maxiters, e, lambda)
 % ************************************************************************
 % SBLEST_ERP: Decoding ERP signals using spatio-temporal filtering 
 %
@@ -9,7 +9,7 @@ function [W,SF,TF,alpha] = SBLEST_ERP(X, Y, Maxiters, e, lam)
 %             C:# of channels,  T:# of timepoints. 
 % Maxiters  : Maximum number of iterations (500 is default).
 % e         : Convergence threshold.
-% lam       : Regularization parameter.
+% lambda       : Regularization parameter.
 %
 % --- Outputs ---
 % W         : Estimated low-rank weighted matrix with size of [C*T],
@@ -25,6 +25,7 @@ function [W,SF,TF,alpha] = SBLEST_ERP(X, Y, Maxiters, e, lam)
 epsilon =e;
 Loss_old = 0;
 threshold = 0.05;
+lam = lambda/2;
 %% reashape the dataset into two dimension and compute initial Sigma_y
 [X_all,C,T]= compute_X_all(X); % reashape the dataset into two dimension
 Psi = eye(C); % the covariance matrix of Gaussian prior distribution is initialized to be Unit diagonal matrix
@@ -44,7 +45,6 @@ for i = 1:Maxiters
         X_APGM(:,:,m) = O_2*X{m};
     end   
 
-     lambda = 2*lam;
      cfg.isintercept =0; %  intercept is not used in regression model
      [V, ~] =NucLR_APGM(cfg, X_APGM, Y', lambda);% Obtaining V via APGM
      W = O_2*V;% compute W via V;
