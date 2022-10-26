@@ -14,4 +14,4 @@ To run the code, download and extract them into a folder of your choice, and nav
 
 At the MATLAB command line, type 
 
-ERP_TEST_main.m
+`ERP_TEST_main.m`
